@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TemasekShuttleV3.Configurations.Entities;
-using TemasekShuttleV3.Domain;
+using TemasekShuttleV3.Data;
 
 namespace TemasekShuttleV3.Data
 {
-    public class TemasekShuttleV3Context : DbContext
+    public class TemasekShuttleV3Context(DbContextOptions<TemasekShuttleV3Context> options) : IdentityDbContext<TemasekShuttleV3User>(options)
     {
-        public TemasekShuttleV3Context (DbContextOptions<TemasekShuttleV3Context> options)
-            : base(options)
-        {
-        }
-
         public DbSet<TemasekShuttleV3.Domain.Booking> Booking { get; set; } = default!;
         public DbSet<TemasekShuttleV3.Domain.Bus> Bus { get; set; } = default!;
         public DbSet<TemasekShuttleV3.Domain.Customer> Customer { get; set; } = default!;
@@ -37,5 +29,4 @@ namespace TemasekShuttleV3.Data
 
         }
     }
-
 }
