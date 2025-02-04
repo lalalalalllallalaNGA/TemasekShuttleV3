@@ -1,0 +1,42 @@
+﻿@page "/schedules"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using TemasekShuttleV3.Domain
+@using TemasekShuttleV3.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="schedules/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Schedule">
+    <PropertyColumn Property="schedule => schedule.BusScheduleDate" />
+    <PropertyColumn Property="schedule => schedule.BusScheduleTime" />
+    <PropertyColumn Property="schedule => schedule.ScheduleLocation" />
+    <PropertyColumn Property="schedule => schedule.DriverDate" />
+    <PropertyColumn Property="schedule => schedule.DriverTime" />
+    <PropertyColumn Property="schedule => schedule.SpareDriver" />
+    <PropertyColumn Property="schedule => schedule.DriverId" />
+
+    <TemplateColumn Context="schedule">
+        <a href="@($"schedules/edit?id={schedule.Id}")">Edit</a> |
+        <a href="@($"schedules/details?id={schedule.Id}")">Details</a> |
+        <a href="@($"schedules/delete?id={schedule.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private TemasekShuttleV3Context context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

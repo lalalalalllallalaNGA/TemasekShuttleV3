@@ -1,0 +1,54 @@
+﻿@page "/buses/create"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Bus</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Bus" OnValidSubmit="AddBus" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="busplate" class="form-label">BusPlate:</label> 
+                <InputText id="busplate" @bind-Value="Bus.BusPlate" class="form-control" /> 
+                <ValidationMessage For="() => Bus.BusPlate" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="buscapacity" class="form-label">BusCapacity:</label> 
+                <InputNumber id="buscapacity" @bind-Value="Bus.BusCapacity" class="form-control" /> 
+                <ValidationMessage For="() => Bus.BusCapacity" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="scheduleid" class="form-label">ScheduleId:</label> 
+                <InputText id="scheduleid" @bind-Value="Bus.ScheduleId" class="form-control" /> 
+                <ValidationMessage For="() => Bus.ScheduleId" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/buses">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Bus Bus { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddBus()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Bus.Add(Bus);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/buses");
+    }
+}

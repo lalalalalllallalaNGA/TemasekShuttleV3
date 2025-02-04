@@ -1,0 +1,48 @@
+﻿@page "/drivers/details"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Driver</h2>
+    <hr />
+    @if (driver is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">DriverName</dt>
+            <dd class="col-sm-10">@driver.DriverName</dd>
+            <dt class="col-sm-2">DriverContact</dt>
+            <dd class="col-sm-10">@driver.DriverContact</dd>
+        </dl>
+        <div>
+            <a href="@($"/drivers/edit?id={driver.Id}")">Edit</a> |
+            <a href="@($"/drivers")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Driver? driver;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        driver = await context.Driver.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (driver is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

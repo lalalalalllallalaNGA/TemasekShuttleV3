@@ -1,0 +1,99 @@
+﻿@page "/scheduleoccurrences/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>ScheduleOccurrence</h2>
+<hr />
+@if (ScheduleOccurrence is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="ScheduleOccurrence" OnValidSubmit="UpdateScheduleOccurrence" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="ScheduleOccurrence.Id" value="@ScheduleOccurrence.Id" />
+                <div class="mb-3">
+                    <label for="busscheduledate" class="form-label">BusScheduleDate:</label>
+                    <InputDate id="busscheduledate" @bind-Value="ScheduleOccurrence.BusScheduleDate" class="form-control" />
+                    <ValidationMessage For="() => ScheduleOccurrence.BusScheduleDate" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="busscheduletime" class="form-label">BusScheduleTime:</label>
+                    <InputDate id="busscheduletime" @bind-Value="ScheduleOccurrence.BusScheduleTime" class="form-control" />
+                    <ValidationMessage For="() => ScheduleOccurrence.BusScheduleTime" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="scheduleid" class="form-label">ScheduleId:</label>
+                    <InputNumber id="scheduleid" @bind-Value="ScheduleOccurrence.ScheduleId" class="form-control" />
+                    <ValidationMessage For="() => ScheduleOccurrence.ScheduleId" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/scheduleoccurrences">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private ScheduleOccurrence? ScheduleOccurrence { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        ScheduleOccurrence ??= await context.ScheduleOccurrence.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (ScheduleOccurrence is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateScheduleOccurrence()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(ScheduleOccurrence!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ScheduleOccurrenceExists(ScheduleOccurrence!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/scheduleoccurrences");
+    }
+
+    private bool ScheduleOccurrenceExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.ScheduleOccurrence.Any(e => e.Id == id);
+    }
+}

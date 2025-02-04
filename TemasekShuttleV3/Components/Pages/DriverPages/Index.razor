@@ -1,0 +1,37 @@
+﻿@page "/drivers"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using TemasekShuttleV3.Domain
+@using TemasekShuttleV3.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="drivers/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Driver">
+    <PropertyColumn Property="driver => driver.DriverName" />
+    <PropertyColumn Property="driver => driver.DriverContact" />
+
+    <TemplateColumn Context="driver">
+        <a href="@($"drivers/edit?id={driver.Id}")">Edit</a> |
+        <a href="@($"drivers/details?id={driver.Id}")">Details</a> |
+        <a href="@($"drivers/delete?id={driver.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private TemasekShuttleV3Context context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

@@ -1,0 +1,94 @@
+﻿@page "/drivers/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Driver</h2>
+<hr />
+@if (Driver is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Driver" OnValidSubmit="UpdateDriver" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Driver.Id" value="@Driver.Id" />
+                <div class="mb-3">
+                    <label for="drivername" class="form-label">DriverName:</label>
+                    <InputText id="drivername" @bind-Value="Driver.DriverName" class="form-control" />
+                    <ValidationMessage For="() => Driver.DriverName" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="drivercontact" class="form-label">DriverContact:</label>
+                    <InputText id="drivercontact" @bind-Value="Driver.DriverContact" class="form-control" />
+                    <ValidationMessage For="() => Driver.DriverContact" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/drivers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Driver? Driver { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Driver ??= await context.Driver.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Driver is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateDriver()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Driver!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!DriverExists(Driver!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/drivers");
+    }
+
+    private bool DriverExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Driver.Any(e => e.Id == id);
+    }
+}

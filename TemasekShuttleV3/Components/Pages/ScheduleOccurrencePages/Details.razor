@@ -1,0 +1,50 @@
+﻿@page "/scheduleoccurrences/details"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>ScheduleOccurrence</h2>
+    <hr />
+    @if (scheduleoccurrence is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">BusScheduleDate</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.BusScheduleDate</dd>
+            <dt class="col-sm-2">BusScheduleTime</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.BusScheduleTime</dd>
+            <dt class="col-sm-2">ScheduleId</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.ScheduleId</dd>
+        </dl>
+        <div>
+            <a href="@($"/scheduleoccurrences/edit?id={scheduleoccurrence.Id}")">Edit</a> |
+            <a href="@($"/scheduleoccurrences")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private ScheduleOccurrence? scheduleoccurrence;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        scheduleoccurrence = await context.ScheduleOccurrence.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (scheduleoccurrence is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

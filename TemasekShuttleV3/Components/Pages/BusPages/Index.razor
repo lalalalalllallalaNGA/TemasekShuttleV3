@@ -1,0 +1,38 @@
+﻿@page "/buses"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using TemasekShuttleV3.Domain
+@using TemasekShuttleV3.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="buses/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Bus">
+    <PropertyColumn Property="bus => bus.BusPlate" />
+    <PropertyColumn Property="bus => bus.BusCapacity" />
+    <PropertyColumn Property="bus => bus.ScheduleId" />
+
+    <TemplateColumn Context="bus">
+        <a href="@($"buses/edit?id={bus.Id}")">Edit</a> |
+        <a href="@($"buses/details?id={bus.Id}")">Details</a> |
+        <a href="@($"buses/delete?id={bus.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private TemasekShuttleV3Context context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

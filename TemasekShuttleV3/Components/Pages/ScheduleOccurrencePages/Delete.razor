@@ -1,0 +1,63 @@
+﻿@page "/scheduleoccurrences/delete"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>ScheduleOccurrence</h2>
+    <hr />
+    @if (scheduleoccurrence is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">BusScheduleDate</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.BusScheduleDate</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">BusScheduleTime</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.BusScheduleTime</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ScheduleId</dt>
+            <dd class="col-sm-10">@scheduleoccurrence.ScheduleId</dd>
+        </dl>
+        <EditForm method="post" Model="scheduleoccurrence" OnValidSubmit="DeleteScheduleOccurrence" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(scheduleoccurrence is null)">Delete</button> |
+            <a href="/scheduleoccurrences">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private ScheduleOccurrence? scheduleoccurrence;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        scheduleoccurrence = await context.ScheduleOccurrence.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (scheduleoccurrence is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteScheduleOccurrence()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.ScheduleOccurrence.Remove(scheduleoccurrence!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/scheduleoccurrences");
+    }
+}

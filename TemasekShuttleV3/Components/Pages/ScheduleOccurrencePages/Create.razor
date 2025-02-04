@@ -1,0 +1,54 @@
+﻿@page "/scheduleoccurrences/create"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>ScheduleOccurrence</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="ScheduleOccurrence" OnValidSubmit="AddScheduleOccurrence" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="busscheduledate" class="form-label">BusScheduleDate:</label> 
+                <InputDate id="busscheduledate" @bind-Value="ScheduleOccurrence.BusScheduleDate" class="form-control" /> 
+                <ValidationMessage For="() => ScheduleOccurrence.BusScheduleDate" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="busscheduletime" class="form-label">BusScheduleTime:</label> 
+                <InputDate id="busscheduletime" @bind-Value="ScheduleOccurrence.BusScheduleTime" class="form-control" /> 
+                <ValidationMessage For="() => ScheduleOccurrence.BusScheduleTime" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="scheduleid" class="form-label">ScheduleId:</label> 
+                <InputNumber id="scheduleid" @bind-Value="ScheduleOccurrence.ScheduleId" class="form-control" /> 
+                <ValidationMessage For="() => ScheduleOccurrence.ScheduleId" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/scheduleoccurrences">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private ScheduleOccurrence ScheduleOccurrence { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddScheduleOccurrence()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.ScheduleOccurrence.Add(ScheduleOccurrence);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/scheduleoccurrences");
+    }
+}

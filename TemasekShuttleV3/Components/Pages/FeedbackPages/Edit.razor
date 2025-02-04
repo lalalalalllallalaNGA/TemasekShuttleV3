@@ -1,0 +1,99 @@
+﻿@page "/feedbacks/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Feedback</h2>
+<hr />
+@if (Feedback is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Feedback" OnValidSubmit="UpdateFeedback" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Feedback.Id" value="@Feedback.Id" />
+                <div class="mb-3">
+                    <label for="feedbackrating" class="form-label">FeedbackRating:</label>
+                    <InputNumber id="feedbackrating" @bind-Value="Feedback.FeedbackRating" class="form-control" />
+                    <ValidationMessage For="() => Feedback.FeedbackRating" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="feedbackcontent" class="form-label">FeedbackContent:</label>
+                    <InputText id="feedbackcontent" @bind-Value="Feedback.FeedbackContent" class="form-control" />
+                    <ValidationMessage For="() => Feedback.FeedbackContent" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="bookingid" class="form-label">BookingId:</label>
+                    <InputNumber id="bookingid" @bind-Value="Feedback.BookingId" class="form-control" />
+                    <ValidationMessage For="() => Feedback.BookingId" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/feedbacks">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Feedback? Feedback { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Feedback ??= await context.Feedback.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Feedback is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateFeedback()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Feedback!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!FeedbackExists(Feedback!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/feedbacks");
+    }
+
+    private bool FeedbackExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Feedback.Any(e => e.Id == id);
+    }
+}

@@ -1,0 +1,48 @@
+﻿@page "/paymentamounts/details"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>PaymentAmount</h2>
+    <hr />
+    @if (paymentamount is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">PeakPrice</dt>
+            <dd class="col-sm-10">@paymentamount.PeakPrice</dd>
+            <dt class="col-sm-2">NonpeakPrice</dt>
+            <dd class="col-sm-10">@paymentamount.NonpeakPrice</dd>
+        </dl>
+        <div>
+            <a href="@($"/paymentamounts/edit?id={paymentamount.Id}")">Edit</a> |
+            <a href="@($"/paymentamounts")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private PaymentAmount? paymentamount;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        paymentamount = await context.PaymentAmount.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (paymentamount is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

@@ -1,0 +1,39 @@
+﻿@page "/scheduleoccurrences"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using TemasekShuttleV3.Domain
+@using TemasekShuttleV3.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="scheduleoccurrences/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.ScheduleOccurrence">
+    <PropertyColumn Property="scheduleoccurrence => scheduleoccurrence.BusScheduleDate.ToShortDateString()" />
+    <PropertyColumn Property="scheduleoccurrence => scheduleoccurrence.BusScheduleDate.ToShortTimeString()" />
+   @*  <PropertyColumn Property="scheduleoccurrence => scheduleoccurrence.BusScheduleTime" /> *@
+    <PropertyColumn Property="scheduleoccurrence => scheduleoccurrence.ScheduleId" />
+
+    <TemplateColumn Context="scheduleoccurrence">
+        <a href="@($"scheduleoccurrences/edit?id={scheduleoccurrence.Id}")">Edit</a> |
+        <a href="@($"scheduleoccurrences/details?id={scheduleoccurrence.Id}")">Details</a> |
+        <a href="@($"scheduleoccurrences/delete?id={scheduleoccurrence.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private TemasekShuttleV3Context context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

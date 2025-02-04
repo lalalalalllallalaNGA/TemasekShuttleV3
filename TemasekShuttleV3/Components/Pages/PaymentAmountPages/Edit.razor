@@ -1,0 +1,94 @@
+﻿@page "/paymentamounts/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>PaymentAmount</h2>
+<hr />
+@if (PaymentAmount is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="PaymentAmount" OnValidSubmit="UpdatePaymentAmount" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="PaymentAmount.Id" value="@PaymentAmount.Id" />
+                <div class="mb-3">
+                    <label for="peakprice" class="form-label">PeakPrice:</label>
+                    <InputNumber id="peakprice" @bind-Value="PaymentAmount.PeakPrice" class="form-control" />
+                    <ValidationMessage For="() => PaymentAmount.PeakPrice" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="nonpeakprice" class="form-label">NonpeakPrice:</label>
+                    <InputNumber id="nonpeakprice" @bind-Value="PaymentAmount.NonpeakPrice" class="form-control" />
+                    <ValidationMessage For="() => PaymentAmount.NonpeakPrice" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/paymentamounts">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private PaymentAmount? PaymentAmount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        PaymentAmount ??= await context.PaymentAmount.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (PaymentAmount is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdatePaymentAmount()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(PaymentAmount!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!PaymentAmountExists(PaymentAmount!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/paymentamounts");
+    }
+
+    private bool PaymentAmountExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.PaymentAmount.Any(e => e.Id == id);
+    }
+}

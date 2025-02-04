@@ -1,0 +1,49 @@
+﻿@page "/drivers/create"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Driver</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Driver" OnValidSubmit="AddDriver" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="drivername" class="form-label">DriverName:</label> 
+                <InputText id="drivername" @bind-Value="Driver.DriverName" class="form-control" /> 
+                <ValidationMessage For="() => Driver.DriverName" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="drivercontact" class="form-label">DriverContact:</label> 
+                <InputText id="drivercontact" @bind-Value="Driver.DriverContact" class="form-control" /> 
+                <ValidationMessage For="() => Driver.DriverContact" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/drivers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Driver Driver { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddDriver()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Driver.Add(Driver);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/drivers");
+    }
+}

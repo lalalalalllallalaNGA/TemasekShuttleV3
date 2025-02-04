@@ -1,0 +1,99 @@
+﻿@page "/buses/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Bus</h2>
+<hr />
+@if (Bus is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Bus" OnValidSubmit="UpdateBus" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Bus.Id" value="@Bus.Id" />
+                <div class="mb-3">
+                    <label for="busplate" class="form-label">BusPlate:</label>
+                    <InputText id="busplate" @bind-Value="Bus.BusPlate" class="form-control" />
+                    <ValidationMessage For="() => Bus.BusPlate" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="buscapacity" class="form-label">BusCapacity:</label>
+                    <InputNumber id="buscapacity" @bind-Value="Bus.BusCapacity" class="form-control" />
+                    <ValidationMessage For="() => Bus.BusCapacity" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="scheduleid" class="form-label">ScheduleId:</label>
+                    <InputText id="scheduleid" @bind-Value="Bus.ScheduleId" class="form-control" />
+                    <ValidationMessage For="() => Bus.ScheduleId" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/buses">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Bus? Bus { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Bus ??= await context.Bus.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Bus is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateBus()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Bus!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!BusExists(Bus!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/buses");
+    }
+
+    private bool BusExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Bus.Any(e => e.Id == id);
+    }
+}

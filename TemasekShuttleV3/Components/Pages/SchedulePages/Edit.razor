@@ -1,0 +1,119 @@
+﻿@page "/schedules/edit"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Schedule</h2>
+<hr />
+@if (Schedule is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Schedule" OnValidSubmit="UpdateSchedule" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Schedule.Id" value="@Schedule.Id" />
+                <div class="mb-3">
+                    <label for="busscheduledate" class="form-label">BusScheduleDate:</label>
+                    <InputDate id="busscheduledate" @bind-Value="Schedule.BusScheduleDate" class="form-control" />
+                    <ValidationMessage For="() => Schedule.BusScheduleDate" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="busscheduletime" class="form-label">BusScheduleTime:</label>
+                    <InputDate id="busscheduletime" @bind-Value="Schedule.BusScheduleTime" class="form-control" />
+                    <ValidationMessage For="() => Schedule.BusScheduleTime" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="schedulelocation" class="form-label">ScheduleLocation:</label>
+                    <InputText id="schedulelocation" @bind-Value="Schedule.ScheduleLocation" class="form-control" />
+                    <ValidationMessage For="() => Schedule.ScheduleLocation" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="driverdate" class="form-label">DriverDate:</label>
+                    <InputDate id="driverdate" @bind-Value="Schedule.DriverDate" class="form-control" />
+                    <ValidationMessage For="() => Schedule.DriverDate" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="drivertime" class="form-label">DriverTime:</label>
+                    <InputDate id="drivertime" @bind-Value="Schedule.DriverTime" class="form-control" />
+                    <ValidationMessage For="() => Schedule.DriverTime" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="sparedriver" class="form-label">SpareDriver:</label>
+                    <InputText id="sparedriver" @bind-Value="Schedule.SpareDriver" class="form-control" />
+                    <ValidationMessage For="() => Schedule.SpareDriver" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="driverid" class="form-label">DriverId:</label>
+                    <InputNumber id="driverid" @bind-Value="Schedule.DriverId" class="form-control" />
+                    <ValidationMessage For="() => Schedule.DriverId" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/schedules">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Schedule? Schedule { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Schedule ??= await context.Schedule.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Schedule is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateSchedule()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Schedule!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ScheduleExists(Schedule!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/schedules");
+    }
+
+    private bool ScheduleExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Schedule.Any(e => e.Id == id);
+    }
+}

@@ -1,0 +1,54 @@
+﻿@page "/payments/details"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Payment</h2>
+    <hr />
+    @if (payment is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">UniquePaymentId</dt>
+            <dd class="col-sm-10">@payment.UniquePaymentId</dd>
+            <dt class="col-sm-2">PaymentType</dt>
+            <dd class="col-sm-10">@payment.PaymentType</dd>
+            <dt class="col-sm-2">PaymentAmount</dt>
+            <dd class="col-sm-10">@payment.PaymentAmount</dd>
+            <dt class="col-sm-2">PaymentAmountId</dt>
+            <dd class="col-sm-10">@payment.PaymentAmountId</dd>
+            <dt class="col-sm-2">BookingId</dt>
+            <dd class="col-sm-10">@payment.BookingId</dd>
+        </dl>
+        <div>
+            <a href="@($"/payments/edit?id={payment.Id}")">Edit</a> |
+            <a href="@($"/payments")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Payment? payment;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        payment = await context.Payment.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (payment is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

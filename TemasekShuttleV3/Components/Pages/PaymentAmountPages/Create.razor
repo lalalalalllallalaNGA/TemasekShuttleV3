@@ -1,0 +1,49 @@
+﻿@page "/paymentamounts/create"
+@using Microsoft.EntityFrameworkCore
+@using TemasekShuttleV3.Domain
+@inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>PaymentAmount</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="PaymentAmount" OnValidSubmit="AddPaymentAmount" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="peakprice" class="form-label">PeakPrice:</label> 
+                <InputNumber id="peakprice" @bind-Value="PaymentAmount.PeakPrice" class="form-control" /> 
+                <ValidationMessage For="() => PaymentAmount.PeakPrice" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="nonpeakprice" class="form-label">NonpeakPrice:</label> 
+                <InputNumber id="nonpeakprice" @bind-Value="PaymentAmount.NonpeakPrice" class="form-control" /> 
+                <ValidationMessage For="() => PaymentAmount.NonpeakPrice" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/paymentamounts">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private PaymentAmount PaymentAmount { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddPaymentAmount()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.PaymentAmount.Add(PaymentAmount);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/paymentamounts");
+    }
+}
