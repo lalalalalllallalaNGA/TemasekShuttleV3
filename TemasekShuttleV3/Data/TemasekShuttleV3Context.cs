@@ -26,6 +26,9 @@ namespace TemasekShuttleV3.Data
             builder.ApplyConfiguration(new ScheduleSeed());
             builder.ApplyConfiguration(new ScheduleOccurrenceSeed());
             builder.ApplyConfiguration(new PaymentAmountSeed());
+            builder.ApplyConfiguration(new RoleSeed());
+            builder.ApplyConfiguration(new UserSeed());
+            builder.ApplyConfiguration(new UserRoleSeed());
 
         }
     }

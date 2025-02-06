@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TemasekShuttleV3.Data;
 
@@ -11,9 +12,11 @@ using TemasekShuttleV3.Data;
 namespace TemasekShuttleV3.Migrations
 {
     [DbContext(typeof(TemasekShuttleV3Context))]
-    partial class TemasekShuttleV3ContextModelSnapshot : ModelSnapshot
+    [Migration("20250206053751_SeedRole")]
+    partial class SeedRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,7 +292,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f0730a30-e5d4-42de-98b9-9c3ebf77490e",
+                            ConcurrencyStamp = "4de46a1f-761c-4002-9fee-1cccb6c5bfd5",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -297,9 +300,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKHaDREY1ZesBMGnGQtz0Clk/fmkNYbTMqdL+BgCG/FP2v1+CdS60cQUPYow/4TFFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFPVnuNyDrM14X6/2QQWkw6Gb3NvVrYb0ZKyti7eiE47bN4jFcjHNk0OTx99lQt+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef42f2b2-8ece-40f4-bebd-cab798694687",
+                            SecurityStamp = "a7a9ccc7-2c66-40c5-bdaa-39d3aad5d15c",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -307,7 +310,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "78c9271b-e508-4214-b105-b448185b1010",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30d7e7ef-0e6c-4fbe-af08-44bad1428610",
+                            ConcurrencyStamp = "459328df-3736-4ff8-a763-12a71afb9840",
                             Email = "jovan@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Jovan",
@@ -315,9 +318,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOVAN@LOCALHOST.COM",
                             NormalizedUserName = "JOVAN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG70M/TVu40FVanJgnKgIqYRppErbxMbgDE8vXm9psB3E2fcer5NhSchVPzmleSIsg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJWXmglXPn5EgMa77+A3J9iESFe/KXgPEavO5TdjMKSuCRQEI9qRWl0yUU8locZhfA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1de2b507-9a05-4222-adb6-5c667761acc6",
+                            SecurityStamp = "4630c4af-21a2-452f-b4f7-5e9567be8ad0",
                             TwoFactorEnabled = false,
                             UserName = "jovan@localhost.com"
                         },
@@ -325,7 +328,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "363dd9c6-47c2-4759-bbfc-25701e3ff1049",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b30f812-9074-40a0-9a67-2388e4bff120",
+                            ConcurrencyStamp = "6fe2a6f9-46a4-4ff6-9fd9-f1f717637d65",
                             Email = "zoey@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Zoey",
@@ -333,9 +336,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZOEY@LOCALHOST.COM",
                             NormalizedUserName = "ZOEY@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPnrxnDPOzKjXGe1vN0aDmEJ1kK7XqRyO9Dc6iFOceqi+Bp1c/0EamMT1Ys3lHtT+A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEObINWoQfrIVMo+520vy9CuA/+JWSW1osaugZ0dHDsXng7o2x+uB+tMqMp4m0rtVCA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "99310573-73d9-4ea8-b080-dd7c0567fb9c",
+                            SecurityStamp = "a6baee1b-762d-41ae-9783-03331b51c0d2",
                             TwoFactorEnabled = false,
                             UserName = "zoey@localhost.com"
                         },
@@ -343,7 +346,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e263b946-a182-42a8-ab8e-3c642dd1b6a4",
+                            ConcurrencyStamp = "92a4a8d3-e2a7-4baf-a7d4-5d5750709532",
                             Email = "yufeng@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "YuFeng",
@@ -351,9 +354,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "YUFENG@LOCALHOST.COM",
                             NormalizedUserName = "YUFENG@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFGcfVVxwr5SvXgrdQ7oDlx76dYLDOpQcghLGjDKQffmqvOGUDDrVcMozxKb49ORxQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJv/mZDHEdEKNtC+sWwccleXivXikK9+p7SSR63T5XuL8gqfyKQjPPlRBZI0UhnLSA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0e22ba5f-2e05-4f24-bac0-31e53201c139",
+                            SecurityStamp = "d1ee0daf-a1a2-4a46-b1d3-db2ac2f7be91",
                             TwoFactorEnabled = false,
                             UserName = "yufeng@localhost.com"
                         },
@@ -361,7 +364,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "18893c71-425e-426e-8cc5-13f24d3fdc3f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d31055dd-67cc-4578-a26e-32d8082d1eed",
+                            ConcurrencyStamp = "f0f39542-d3eb-479c-9aef-743c4d53a7b7",
                             Email = "Triston@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Triston",
@@ -369,9 +372,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TRISTON@LOCALHOST.COM",
                             NormalizedUserName = "TRISTON@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC6VdQrjrK3SOAadOxdrkpKjkK7epd9BoIRhKavvtvWpRiukK3OMxmJeTdB3DL21Gg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIh0u5L35W0zC+Z439E14MvTyYzJtRaniUJTztbFG6xUrr/2kMImx9kRBuigTPKy7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64a120d8-675b-4593-b832-4fabb4fc65ac",
+                            SecurityStamp = "46b881cf-9318-4579-8de1-167cd2a4f98d",
                             TwoFactorEnabled = false,
                             UserName = "triston@localhost.com"
                         });
@@ -662,15 +665,15 @@ namespace TemasekShuttleV3.Migrations
                         new
                         {
                             Id = 1,
-                            BusScheduleDate = new DateTime(2025, 2, 6, 13, 38, 14, 207, DateTimeKind.Local).AddTicks(4969),
-                            BusScheduleTime = new DateTime(2025, 2, 6, 13, 38, 14, 207, DateTimeKind.Local).AddTicks(4978),
+                            BusScheduleDate = new DateTime(2025, 2, 6, 13, 37, 50, 699, DateTimeKind.Local).AddTicks(5011),
+                            BusScheduleTime = new DateTime(2025, 2, 6, 13, 37, 50, 699, DateTimeKind.Local).AddTicks(5022),
                             ScheduleId = 0
                         },
                         new
                         {
                             Id = 2,
-                            BusScheduleDate = new DateTime(2025, 2, 6, 13, 38, 14, 207, DateTimeKind.Local).AddTicks(4981),
-                            BusScheduleTime = new DateTime(2025, 2, 6, 13, 38, 14, 207, DateTimeKind.Local).AddTicks(4981),
+                            BusScheduleDate = new DateTime(2025, 2, 6, 13, 37, 50, 699, DateTimeKind.Local).AddTicks(5024),
+                            BusScheduleTime = new DateTime(2025, 2, 6, 13, 37, 50, 699, DateTimeKind.Local).AddTicks(5024),
                             ScheduleId = 0
                         });
                 });
