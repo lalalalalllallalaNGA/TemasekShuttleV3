@@ -3,14 +3,18 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using TemasekShuttleV3.Domain
 @using TemasekShuttleV3.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+@attribute [Authorize(Roles = "Administrator, User")]
 
 <PageTitle>Index</PageTitle>
 
 <h1>Index</h1>
 
 <p>
+    Only Admins and Drivers can see this.
     <a href="bookings/create">Create New</a>
 </p>
 
@@ -23,7 +27,9 @@
     <TemplateColumn Context="booking">
         <a href="@($"bookings/edit?id={booking.Id}")">Edit</a> |
         <a href="@($"bookings/details?id={booking.Id}")">Details</a> |
-        <a href="@($"bookings/delete?id={booking.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator"> 
+            <a href="@($"bookings/delete?id={booking.Id}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 

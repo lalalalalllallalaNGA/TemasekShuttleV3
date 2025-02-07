@@ -59,5 +59,10 @@ DELETE FROM AspNetUserRoles
 WHERE UserId NOT IN (SELECT Id FROM AspNetUsers)
    OR RoleId NOT IN (SELECT Id FROM AspNetRoles);
 
+DELETE FROM AspNetRoles;
+DELETE FROM AspNetUsers;
+DELETE FROM AspNetUserRoles;
+
+
 
 

@@ -21,7 +21,9 @@
     <TemplateColumn Context="customer">
         <a href="@($"customers/edit?id={customer.Id}")">Edit</a> |
         <a href="@($"customers/details?id={customer.Id}")">Details</a> |
-        <a href="@($"customers/delete?id={customer.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator">
+            <a href="@($"customers/delete?id={customer.Id}")">Delete</a>
+        </AuthorizeView>  
     </TemplateColumn>
 </QuickGrid>
 

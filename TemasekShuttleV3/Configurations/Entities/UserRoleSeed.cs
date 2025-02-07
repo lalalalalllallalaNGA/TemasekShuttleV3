@@ -18,28 +18,29 @@ namespace TemasekShuttleV3.Configurations.Entities
 
                 // TODO: create driver-user mapping here
 
+
                 new IdentityUserRole<string> //jovandriver
                 {
-                    RoleId = "023f7028-ebed-4d50-a0c7-fc232628a75c",
-                    UserId = "78c9271b-e508-4214-b105-b448185b1010"
+                    RoleId = "cc929e90-2902-4d56-b9b3-663d1acba20f", //driver role
+                    UserId = "78c9271b-e508-4214-b105-b448185b1010"  //jovan user
                 },
 
                 new IdentityUserRole<string> //zoeydriver
                 {
-                    RoleId = "f445a56e-14eb-4906-94d7-7af9e462dff9",
-                    UserId = "363dd9c6-47c2-4759-bbfc-25701e3ff1049"
+                    RoleId = "cc929e90-2902-4d56-b9b3-663d1acba20f",//driver role
+                    UserId = "363dd9c6-47c2-4759-bbfc-25701e3ff1049"//zoey user
                 },
 
                 new IdentityUserRole<string> //yufengdriver
                 {
-                    RoleId = "b20b199c-9749-4f01-8b80-a5a174d9c502",
-                    UserId = "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8"
+                    RoleId = "cc929e90-2902-4d56-b9b3-663d1acba20f",//driver role
+                    UserId = "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8"//yufeng user
                 },
 
                 new IdentityUserRole<string> //tristondriver
                 {
-                    RoleId = "414788fe-9218-4ce0-a736-4d28d265fdf9",
-                    UserId = "18893c71-425e-426e-8cc5-13f24d3fdc3f"
+                    RoleId = "cc929e90-2902-4d56-b9b3-663d1acba20f",//driver role
+                    UserId = "18893c71-425e-426e-8cc5-13f24d3fdc3f"//triston user
                 }
                 );
         }
