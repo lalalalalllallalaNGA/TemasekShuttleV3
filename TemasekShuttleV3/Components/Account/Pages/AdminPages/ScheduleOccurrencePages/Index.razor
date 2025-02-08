@@ -6,6 +6,8 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
 
+@attribute [Authorize(Roles = "Administrator")]
+
 <PageTitle>Index</PageTitle>
 
 <h1>Index</h1>
@@ -21,9 +23,11 @@
     <PropertyColumn Property="scheduleoccurrence => scheduleoccurrence.ScheduleId" />
 
     <TemplateColumn Context="scheduleoccurrence">
-        <a href="@($"scheduleoccurrences/edit?id={scheduleoccurrence.Id}")">Edit</a> |
-        <a href="@($"scheduleoccurrences/details?id={scheduleoccurrence.Id}")">Details</a> |
-        <a href="@($"scheduleoccurrences/delete?id={scheduleoccurrence.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator">
+            <a href="@($"scheduleoccurrences/edit?id={scheduleoccurrence.Id}")">Edit</a> |
+            <a href="@($"scheduleoccurrences/details?id={scheduleoccurrence.Id}")">Details</a> |
+            <a href="@($"scheduleoccurrences/delete?id={scheduleoccurrence.Id}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 

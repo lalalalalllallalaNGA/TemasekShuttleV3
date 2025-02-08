@@ -6,6 +6,8 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
 
+@attribute [Authorize(Roles = "Administrator, User")]
+
 <PageTitle>Index</PageTitle>
 
 <h1>Index</h1>

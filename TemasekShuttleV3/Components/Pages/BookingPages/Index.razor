@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using TemasekShuttleV3.Domain
 @using TemasekShuttleV3.Data
-@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
 
@@ -14,8 +13,8 @@
 <h1>Index</h1>
 
 <p>
-    Only Admins and Drivers can see this.
-    <a href="bookings/create">Create New</a>
+    @* Only Admins and Drivers can see this. *@
+    <a href="bookings/create">Click here to create new booking</a>
 </p>
 
 <QuickGrid Class="table" Items="context.Booking">

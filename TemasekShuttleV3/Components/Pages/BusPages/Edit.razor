@@ -1,4 +1,4 @@
-﻿@page "/buses/edit"
+﻿@page "/buss/edit"
 @using Microsoft.EntityFrameworkCore
 @using TemasekShuttleV3.Domain
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
@@ -44,7 +44,7 @@ else
 }
 
 <div>
-    <a href="/buses">Back to List</a>
+    <a href="/buss">Back to List</a>
 </div>
 
 @code {
@@ -88,7 +88,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/buses");
+        NavigationManager.NavigateTo("/buss");
     }
 
     private bool BusExists(int id)

@@ -1,4 +1,4 @@
-﻿@page "/buses/details"
+﻿@page "/buss/details"
 @using Microsoft.EntityFrameworkCore
 @using TemasekShuttleV3.Domain
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
@@ -25,8 +25,8 @@
             <dd class="col-sm-10">@bus.ScheduleId</dd>
         </dl>
         <div>
-            <a href="@($"/buses/edit?id={bus.Id}")">Edit</a> |
-            <a href="@($"/buses")">Back to List</a>
+            <a href="@($"/buss/edit?id={bus.Id}")">Edit</a> |
+            <a href="@($"/buss")">Back to List</a>
         </div>
     }
 </div>

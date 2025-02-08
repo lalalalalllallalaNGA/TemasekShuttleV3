@@ -1,5 +1,4 @@
-﻿<h3>_Imports</h3>
+﻿@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Administrator, Driver")]
 
-@code {
-
-}
+@* //authorisation for driver and admin only *@

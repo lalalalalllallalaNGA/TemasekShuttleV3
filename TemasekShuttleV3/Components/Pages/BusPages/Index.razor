@@ -1,10 +1,12 @@
-﻿@page "/buses"
+﻿@page "/buss"
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using TemasekShuttleV3.Domain
 @using TemasekShuttleV3.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
+
+@attribute [Authorize(Roles = "Administrator, User, Driver")]
 
 <PageTitle>Index</PageTitle>
 
@@ -20,9 +22,11 @@
     <PropertyColumn Property="bus => bus.ScheduleId" />
 
     <TemplateColumn Context="bus">
-        <a href="@($"buses/edit?id={bus.Id}")">Edit</a> |
-        <a href="@($"buses/details?id={bus.Id}")">Details</a> |
-        <a href="@($"buses/delete?id={bus.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator"> 
+            <a href="@($"buses/edit?id={bus.Id}")">Edit</a> |
+            <a href="@($"buses/details?id={bus.Id}")">Details</a> |
+            <a href="@($"buses/delete?id={bus.Id}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 
