@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TemasekShuttleV3.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class n : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,8 @@ namespace TemasekShuttleV3.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BusTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BusDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BusTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     BusLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ScheduleOccurrenceId = table.Column<int>(type: "int", nullable: false)
@@ -91,6 +92,7 @@ namespace TemasekShuttleV3.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerRN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerContact = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -138,6 +140,7 @@ namespace TemasekShuttleV3.Migrations
                     PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaymentAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PaymentAmountId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -165,11 +168,11 @@ namespace TemasekShuttleV3.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BusScheduleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BusScheduleTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BusScheduleDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BusScheduleTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     ScheduleLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DriverDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DriverTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DriverDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    DriverTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     SpareDriver = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DriverId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -184,8 +187,8 @@ namespace TemasekShuttleV3.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BusScheduleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BusScheduleTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BusScheduleDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BusScheduleTime = table.Column<TimeOnly>(type: "time", nullable: false),
                     ScheduleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -314,11 +317,11 @@ namespace TemasekShuttleV3.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8", 0, "d8f45ef2-2256-4a8b-b36d-991ada5759ef", "yufeng@localhost.com", true, "YuFeng", "Driver", false, null, "YUFENG@LOCALHOST.COM", "YUFENG@LOCALHOST.COM", "AQAAAAIAAYagAAAAEEdvORZm1yrA7k/J566UE+bp+UcVxr27N3VAiFa5Q4HEMJZlFKtMs1Yt+tdiSPB9OQ==", null, false, "55152716-a543-4782-a879-fcdd46c34543", false, "yufeng@localhost.com" },
-                    { "18893c71-425e-426e-8cc5-13f24d3fdc3f", 0, "0c9cb4ce-3250-4343-b5f2-4ddf614eba78", "Triston@localhost.com", true, "Triston", "Driver", false, null, "TRISTON@LOCALHOST.COM", "TRISTON@LOCALHOST.COM", "AQAAAAIAAYagAAAAEFz38qRFEAOyDLiG7JXX7Nv1kBfIGTFQJ47oYa95h4ldZId1uVJ8KgIayhREjkA8wg==", null, false, "6d520897-3ab5-49c9-ac8d-ec3ee6d2c52e", false, "triston@localhost.com" },
-                    { "363dd9c6-47c2-4759-bbfc-25701e3ff1049", 0, "5919e6d5-b6cc-4512-9a0b-80c95753d065", "zoey@localhost.com", true, "Zoey", "Driver", false, null, "ZOEY@LOCALHOST.COM", "ZOEY@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGYYc54iA+DGasksJWu0j+vEhhiqGMpTD0e8Z006OWvt0sGZxmSB4iDyzgcwR/QMEw==", null, false, "1aae53af-8ba5-4bea-b640-ed8ca8a19635", false, "zoey@localhost.com" },
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "d211560e-c626-4ab4-84f9-6d95fd74be6b", "admin@localhost.com", true, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEAa7DVQvNhups04mPz+YVeR+/+ZBJCLV9vSJh3J2J6vufBDBjYs0iBuKJbQqHsOPEQ==", null, false, "c2fbe23e-28fb-43f5-b6b0-dfb1027a0f2a", false, "admin@localhost.com" },
-                    { "78c9271b-e508-4214-b105-b448185b1010", 0, "7fa54f15-0072-46e1-9da7-1459af85fb15", "jovan@localhost.com", true, "Jovan", "Driver", false, null, "JOVAN@LOCALHOST.COM", "JOVAN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHTQT5s8dMsix4J8ecYQ6JUqDJzn0w1OFBgHXb4+Ydbi0KW22Ck4qU2NtOz7vS2rcg==", null, false, "0a516573-889c-458e-8bec-7e384b5dfd2a", false, "jovan@localhost.com" }
+                    { "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8", 0, "4aaee80d-d7a5-49b7-b386-e1a5887b6595", "yufeng@localhost.com", true, "YuFeng", "Driver", false, null, "YUFENG@LOCALHOST.COM", "YUFENG@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPuucr5XK8/2pBe4cefVI9fAB4qhOJufWMsopRsfandvnGmKIEnqDImGawwhA/truw==", null, false, "4e8ec676-9a51-4756-98f4-ca8670110de7", false, "yufeng@localhost.com" },
+                    { "18893c71-425e-426e-8cc5-13f24d3fdc3f", 0, "9b77b9ec-2276-4fb3-8b5a-05dae1bf8c52", "Triston@localhost.com", true, "Triston", "Driver", false, null, "TRISTON@LOCALHOST.COM", "TRISTON@LOCALHOST.COM", "AQAAAAIAAYagAAAAENGgy/rkcm9rlAzN+Cle8cKkaX0m7vZesvDmrvJ6u7Q6tFwlQPP8D7eLwjAlbpqiEA==", null, false, "7879c6be-8e73-40c8-b5c4-1b4eb3b18ec8", false, "triston@localhost.com" },
+                    { "363dd9c6-47c2-4759-bbfc-25701e3ff1049", 0, "bf51e55f-c562-4a63-8032-7e417e7f9698", "zoey@localhost.com", true, "Zoey", "Driver", false, null, "ZOEY@LOCALHOST.COM", "ZOEY@LOCALHOST.COM", "AQAAAAIAAYagAAAAENyc0XDTZ+fZzwSws3aiUXoM2Lg7Q9etE//COZ/StN95zt0hCtPlJn1aquIJW77PCg==", null, false, "e5549bf3-226a-4c5c-80a0-5820afdda245", false, "zoey@localhost.com" },
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "013921a2-39de-4074-b772-a14ce48bb0b3", "admin@localhost.com", true, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAENT979GaGn/NFjRR2xlGYob+i/Wb64KKfh8vWV0g5Euav41l9HF75Med/stR70Vxkg==", null, false, "8a62d1f1-329e-4a1a-83aa-aaaec5e4060d", false, "admin@localhost.com" },
+                    { "78c9271b-e508-4214-b105-b448185b1010", 0, "ca0239ab-25f8-4f75-aefd-813b67de6673", "jovan@localhost.com", true, "Jovan", "Driver", false, null, "JOVAN@LOCALHOST.COM", "JOVAN@LOCALHOST.COM", "AQAAAAIAAYagAAAAELHyKN0smtepGNwHcg1wfqJPANVZgIipeL7JBD6m0IekdYrf/pC4MSMtcSndf7cqnQ==", null, false, "6d04cccb-1518-4a79-9b28-80ed680644d8", false, "jovan@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -351,8 +354,8 @@ namespace TemasekShuttleV3.Migrations
                 columns: new[] { "Id", "BusScheduleDate", "BusScheduleTime", "DriverDate", "DriverId", "DriverTime", "ScheduleLocation", "SpareDriver" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tampines East MRT Exit C", "" },
-                    { 2, new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), "Punggol MRT Exit A", "" }
+                    { 1, new DateOnly(2025, 8, 18), new TimeOnly(8, 0, 0), new DateOnly(2025, 8, 18), 1, new TimeOnly(8, 0, 0), "Tampines East MRT Exit C", null },
+                    { 2, new DateOnly(2025, 8, 18), new TimeOnly(8, 0, 0), new DateOnly(2025, 8, 18), 2, new TimeOnly(8, 0, 0), "Punggol MRT Exit A", null }
                 });
 
             migrationBuilder.InsertData(
@@ -360,8 +363,8 @@ namespace TemasekShuttleV3.Migrations
                 columns: new[] { "Id", "BusScheduleDate", "BusScheduleTime", "ScheduleId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6850), new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6863), 0 },
-                    { 2, new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6864), new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6864), 0 }
+                    { 1, new DateOnly(2025, 8, 18), new TimeOnly(8, 0, 0), 1 },
+                    { 2, new DateOnly(2025, 8, 18), new TimeOnly(8, 0, 0), 2 }
                 });
 
             migrationBuilder.InsertData(

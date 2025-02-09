@@ -44,7 +44,7 @@
                 </InputSelect>
                 <ValidationMessage For="() => Payment.PaymentAmount" class="text-danger" />
             </div>
-            <div class="mb-3">
+            <div class="mb-3" hidden>
                 <label for="paymentamountid" class="form-label">PaymentAmountId:</label> 
                 <InputNumber id="paymentamountid" @bind-Value="Payment.PaymentAmountId" class="form-control" /> 
                 <ValidationMessage For="() => Payment.PaymentAmountId" class="text-danger" /> 
@@ -53,7 +53,14 @@
                 <label for="bookingid" class="form-label">BookingId:</label> 
                 <InputNumber id="bookingid" @bind-Value="Payment.BookingId" class="form-control" /> 
                 <ValidationMessage For="() => Payment.BookingId" class="text-danger" /> 
-            </div>        
+            </div>   
+            
+            <div class="mb-3">
+                <label for="customerid" class="form-label">CustomerId:</label>
+                <InputNumber id="customerid" @bind-Value="Payment.CustomerId" class="form-control" />
+                <ValidationMessage For="() => Payment.CustomerId" class="text-danger" />
+            </div>
+
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

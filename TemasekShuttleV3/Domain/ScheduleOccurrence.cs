@@ -2,8 +2,8 @@
 {
     public class ScheduleOccurrence : BaseDomainModel
     {
-        public DateTime BusScheduleDate { get; set; }
-        public DateTime BusScheduleTime { get; set; }
+        public DateOnly BusScheduleDate { get; set; }
+        public TimeOnly BusScheduleTime { get; set; }
         public int ScheduleId { get; set; } //FK
     }
 }

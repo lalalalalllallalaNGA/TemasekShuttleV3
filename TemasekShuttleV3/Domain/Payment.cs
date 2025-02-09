@@ -6,6 +6,7 @@
         public string? PaymentType { get; set; }
         public decimal? PaymentAmount { get; set; } //show paymentamount
         public int PaymentAmountId { get; set; } // FK
+        public int CustomerId { get; set; }
         public int BookingId { get; set; } //FK 
     }
 }

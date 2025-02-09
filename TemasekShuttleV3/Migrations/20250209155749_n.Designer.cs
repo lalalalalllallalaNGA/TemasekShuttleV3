@@ -12,8 +12,8 @@ using TemasekShuttleV3.Data;
 namespace TemasekShuttleV3.Migrations
 {
     [DbContext(typeof(TemasekShuttleV3Context))]
-    [Migration("20250207051336_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250209155749_n")]
+    partial class n
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,7 +280,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d211560e-c626-4ab4-84f9-6d95fd74be6b",
+                            ConcurrencyStamp = "013921a2-39de-4074-b772-a14ce48bb0b3",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -288,9 +288,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAa7DVQvNhups04mPz+YVeR+/+ZBJCLV9vSJh3J2J6vufBDBjYs0iBuKJbQqHsOPEQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENT979GaGn/NFjRR2xlGYob+i/Wb64KKfh8vWV0g5Euav41l9HF75Med/stR70Vxkg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c2fbe23e-28fb-43f5-b6b0-dfb1027a0f2a",
+                            SecurityStamp = "8a62d1f1-329e-4a1a-83aa-aaaec5e4060d",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -298,7 +298,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "78c9271b-e508-4214-b105-b448185b1010",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7fa54f15-0072-46e1-9da7-1459af85fb15",
+                            ConcurrencyStamp = "ca0239ab-25f8-4f75-aefd-813b67de6673",
                             Email = "jovan@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Jovan",
@@ -306,9 +306,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOVAN@LOCALHOST.COM",
                             NormalizedUserName = "JOVAN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHTQT5s8dMsix4J8ecYQ6JUqDJzn0w1OFBgHXb4+Ydbi0KW22Ck4qU2NtOz7vS2rcg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELHyKN0smtepGNwHcg1wfqJPANVZgIipeL7JBD6m0IekdYrf/pC4MSMtcSndf7cqnQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0a516573-889c-458e-8bec-7e384b5dfd2a",
+                            SecurityStamp = "6d04cccb-1518-4a79-9b28-80ed680644d8",
                             TwoFactorEnabled = false,
                             UserName = "jovan@localhost.com"
                         },
@@ -316,7 +316,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "363dd9c6-47c2-4759-bbfc-25701e3ff1049",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5919e6d5-b6cc-4512-9a0b-80c95753d065",
+                            ConcurrencyStamp = "bf51e55f-c562-4a63-8032-7e417e7f9698",
                             Email = "zoey@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Zoey",
@@ -324,9 +324,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZOEY@LOCALHOST.COM",
                             NormalizedUserName = "ZOEY@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGYYc54iA+DGasksJWu0j+vEhhiqGMpTD0e8Z006OWvt0sGZxmSB4iDyzgcwR/QMEw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENyc0XDTZ+fZzwSws3aiUXoM2Lg7Q9etE//COZ/StN95zt0hCtPlJn1aquIJW77PCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1aae53af-8ba5-4bea-b640-ed8ca8a19635",
+                            SecurityStamp = "e5549bf3-226a-4c5c-80a0-5820afdda245",
                             TwoFactorEnabled = false,
                             UserName = "zoey@localhost.com"
                         },
@@ -334,7 +334,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "0b8ef920-dad6-4d01-9afa-78c3cb9d92b8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8f45ef2-2256-4a8b-b36d-991ada5759ef",
+                            ConcurrencyStamp = "4aaee80d-d7a5-49b7-b386-e1a5887b6595",
                             Email = "yufeng@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "YuFeng",
@@ -342,9 +342,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "YUFENG@LOCALHOST.COM",
                             NormalizedUserName = "YUFENG@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEdvORZm1yrA7k/J566UE+bp+UcVxr27N3VAiFa5Q4HEMJZlFKtMs1Yt+tdiSPB9OQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPuucr5XK8/2pBe4cefVI9fAB4qhOJufWMsopRsfandvnGmKIEnqDImGawwhA/truw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55152716-a543-4782-a879-fcdd46c34543",
+                            SecurityStamp = "4e8ec676-9a51-4756-98f4-ca8670110de7",
                             TwoFactorEnabled = false,
                             UserName = "yufeng@localhost.com"
                         },
@@ -352,7 +352,7 @@ namespace TemasekShuttleV3.Migrations
                         {
                             Id = "18893c71-425e-426e-8cc5-13f24d3fdc3f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0c9cb4ce-3250-4343-b5f2-4ddf614eba78",
+                            ConcurrencyStamp = "9b77b9ec-2276-4fb3-8b5a-05dae1bf8c52",
                             Email = "Triston@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Triston",
@@ -360,9 +360,9 @@ namespace TemasekShuttleV3.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TRISTON@LOCALHOST.COM",
                             NormalizedUserName = "TRISTON@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFz38qRFEAOyDLiG7JXX7Nv1kBfIGTFQJ47oYa95h4ldZId1uVJ8KgIayhREjkA8wg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENGgy/rkcm9rlAzN+Cle8cKkaX0m7vZesvDmrvJ6u7Q6tFwlQPP8D7eLwjAlbpqiEA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6d520897-3ab5-49c9-ac8d-ec3ee6d2c52e",
+                            SecurityStamp = "7879c6be-8e73-40c8-b5c4-1b4eb3b18ec8",
                             TwoFactorEnabled = false,
                             UserName = "triston@localhost.com"
                         });
@@ -376,11 +376,14 @@ namespace TemasekShuttleV3.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateOnly>("BusDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("BusLocation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("BusTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("BusTime")
+                        .HasColumnType("time");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -441,6 +444,9 @@ namespace TemasekShuttleV3.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerRN")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -526,6 +532,9 @@ namespace TemasekShuttleV3.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<decimal?>("PaymentAmount")
                         .HasColumnType("decimal(18,2)");
 
@@ -578,20 +587,20 @@ namespace TemasekShuttleV3.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("BusScheduleDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("BusScheduleDate")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("BusScheduleTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("BusScheduleTime")
+                        .HasColumnType("time");
 
-                    b.Property<DateTime>("DriverDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DriverDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DriverTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("DriverTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("ScheduleLocation")
                         .HasColumnType("nvarchar(max)");
@@ -607,24 +616,22 @@ namespace TemasekShuttleV3.Migrations
                         new
                         {
                             Id = 1,
-                            BusScheduleDate = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            BusScheduleTime = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DriverDate = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DriverId = 0,
-                            DriverTime = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            ScheduleLocation = "Tampines East MRT Exit C",
-                            SpareDriver = ""
+                            BusScheduleDate = new DateOnly(2025, 8, 18),
+                            BusScheduleTime = new TimeOnly(8, 0, 0),
+                            DriverDate = new DateOnly(2025, 8, 18),
+                            DriverId = 1,
+                            DriverTime = new TimeOnly(8, 0, 0),
+                            ScheduleLocation = "Tampines East MRT Exit C"
                         },
                         new
                         {
                             Id = 2,
-                            BusScheduleDate = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            BusScheduleTime = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DriverDate = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DriverId = 0,
-                            DriverTime = new DateTime(2025, 8, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            ScheduleLocation = "Punggol MRT Exit A",
-                            SpareDriver = ""
+                            BusScheduleDate = new DateOnly(2025, 8, 18),
+                            BusScheduleTime = new TimeOnly(8, 0, 0),
+                            DriverDate = new DateOnly(2025, 8, 18),
+                            DriverId = 2,
+                            DriverTime = new TimeOnly(8, 0, 0),
+                            ScheduleLocation = "Punggol MRT Exit A"
                         });
                 });
 
@@ -636,11 +643,11 @@ namespace TemasekShuttleV3.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("BusScheduleDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("BusScheduleDate")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("BusScheduleTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("BusScheduleTime")
+                        .HasColumnType("time");
 
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
@@ -653,16 +660,16 @@ namespace TemasekShuttleV3.Migrations
                         new
                         {
                             Id = 1,
-                            BusScheduleDate = new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6850),
-                            BusScheduleTime = new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6863),
-                            ScheduleId = 0
+                            BusScheduleDate = new DateOnly(2025, 8, 18),
+                            BusScheduleTime = new TimeOnly(8, 0, 0),
+                            ScheduleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            BusScheduleDate = new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6864),
-                            BusScheduleTime = new DateTime(2025, 2, 7, 13, 13, 35, 410, DateTimeKind.Local).AddTicks(6864),
-                            ScheduleId = 0
+                            BusScheduleDate = new DateOnly(2025, 8, 18),
+                            BusScheduleTime = new TimeOnly(8, 0, 0),
+                            ScheduleId = 2
                         });
                 });
 

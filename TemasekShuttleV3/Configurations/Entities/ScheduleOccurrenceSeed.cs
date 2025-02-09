@@ -13,17 +13,19 @@ namespace TemasekShuttleV3.Configurations.Entities
                 {
                     Id = 1,
 
-                    BusScheduleDate = DateTime.Now,
+                    BusScheduleDate = new DateOnly(2025, 8, 18),
 
-                    BusScheduleTime = DateTime.Now
+                    BusScheduleTime = new TimeOnly(08, 00, 00),
+                    ScheduleId = 1,
                 },
                 new ScheduleOccurrence
                 {
                     Id = 2,
 
-                    BusScheduleDate = DateTime.Now,
+                    BusScheduleDate = new DateOnly(2025, 8, 18),
 
-                    BusScheduleTime = DateTime.Now
+                    BusScheduleTime = new TimeOnly(08, 00, 00),
+                    ScheduleId = 2,
                 }
             );
         }
