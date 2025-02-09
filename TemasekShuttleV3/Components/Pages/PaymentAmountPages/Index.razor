@@ -10,10 +10,12 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<h1>Bus Rates :</h1>
 
 <p>
-    <a href="paymentamounts/create">Create New</a>
+    <AuthorizeView Roles="Administrator">
+        <a href="paymentamounts/create">Create New</a>
+    </AuthorizeView>
 </p>
 
 <QuickGrid Class="table" Items="context.PaymentAmount">
@@ -21,9 +23,13 @@
     <PropertyColumn Property="paymentamount => paymentamount.NonpeakPrice" />
 
     <TemplateColumn Context="paymentamount">
-        <a href="@($"paymentamounts/edit?id={paymentamount.Id}")">Edit</a> |
-        <a href="@($"paymentamounts/details?id={paymentamount.Id}")">Details</a> |
-        <a href="@($"paymentamounts/delete?id={paymentamount.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator">
+            <a href="@($"paymentamounts/edit?id={paymentamount.Id}")">Edit</a> |
+        </AuthorizeView>
+            <a href="@($"paymentamounts/details?id={paymentamount.Id}")">Details</a> |
+        <AuthorizeView Roles="Administrator">
+            <a href="@($"paymentamounts/delete?id={paymentamount.Id}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 

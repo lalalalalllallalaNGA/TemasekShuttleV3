@@ -10,10 +10,10 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<h1>Payment Page </h1>
 
 <p>
-    <a href="payments/create">Create New</a>
+    <a href="payments/create">make new booking payment here</a>
 </p>
 
 <QuickGrid Class="table" Items="context.Payment">
@@ -26,7 +26,9 @@
     <TemplateColumn Context="payment">
         <a href="@($"payments/edit?id={payment.Id}")">Edit</a> |
         <a href="@($"payments/details?id={payment.Id}")">Details</a> |
-        <a href="@($"payments/delete?id={payment.Id}")">Delete</a>
+        <AuthorizeView Roles="Administrator">
+            <a href="@($"payments/delete?id={payment.Id}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 

@@ -4,7 +4,10 @@
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
 @inject NavigationManager NavigationManager
 
+@attribute [Authorize(Roles = "Administrator")]
+
 <PageTitle>Create</PageTitle>
+
 
 <h1>Create</h1>
 
@@ -36,7 +39,7 @@
 </div>
 
 <div>
-    <a href="/buses">Back to List</a>
+    <a href="/buss">Back to List</a>
 </div>
 
 @code {
@@ -49,6 +52,6 @@
         using var context = DbFactory.CreateDbContext();
         context.Bus.Add(Bus);
         await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/buses");
+        NavigationManager.NavigateTo("/buss");
     }
 }

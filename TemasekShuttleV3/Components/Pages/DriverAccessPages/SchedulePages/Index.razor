@@ -6,9 +6,11 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<TemasekShuttleV3.Data.TemasekShuttleV3Context> DbFactory
 
-<PageTitle>Index</PageTitle>
+@attribute [Authorize(Roles = "Administrator, driver")]
 
-<h1>Index</h1>
+<PageTitle>Schedule Page</PageTitle>
+
+<h1>Driver & Bus Schedule</h1>
 
 <p>
     <a href="schedules/create">Create New</a>

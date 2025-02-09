@@ -16,21 +16,26 @@
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="bustime" class="form-label">BusTime:</label> 
-                <InputDate id="bustime" @bind-Value="Booking.BusTime" class="form-control" /> 
-                <ValidationMessage For="() => Booking.BusTime" class="text-danger" /> 
-            </div>        
+                <label for="busdate" class="form-label">Bus:</label>
+                <InputDate id="bustime" @bind-Value="Booking.BusTime" class="form-control" />
+                <ValidationMessage For="() => Booking.BusTime" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="buslocation" class="form-label">BusLocation:</label> 
-                <InputText id="buslocation" @bind-Value="Booking.BusLocation" class="form-control" /> 
-                <ValidationMessage For="() => Booking.BusLocation" class="text-danger" /> 
-            </div>        
+                <label for="buslocation" class="form-label">BusLocation:</label>
+                <InputSelect id="buslocation" @bind-Value="Booking.BusLocation" class="form-control">
+                    <option value="">Select a location</option>
+                    <option value="Tampines East MRT Exit C (SA4B1G3R)">Tampines East MRT Exit C (SA4B1G3R)</option>
+                    <option value="Punggol MRT Exit A (PM0T7J9D)">Punggol MRT Exit A (PM0T7J9D)</option>
+                </InputSelect>
+                <ValidationMessage For="() => Booking.BusLocation" class="text-danger" />
+            </div>
+
             <div class="mb-3">
                 <label for="customerid" class="form-label">CustomerId:</label> 
                 <InputNumber id="customerid" @bind-Value="Booking.CustomerId" class="form-control" /> 
                 <ValidationMessage For="() => Booking.CustomerId" class="text-danger" /> 
             </div>        
-            <div class="mb-3">
+            <div class="mb-3" hidden>
                 <label for="scheduleoccurrenceid" class="form-label">ScheduleOccurrenceId:</label> 
                 <InputNumber id="scheduleoccurrenceid" @bind-Value="Booking.ScheduleOccurrenceId" class="form-control" /> 
                 <ValidationMessage For="() => Booking.ScheduleOccurrenceId" class="text-danger" /> 
@@ -47,6 +52,11 @@
 @code {
     [SupplyParameterFromForm]
     private Booking Booking { get; set; } = new();
+
+    
+     
+ 
+
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddBooking()

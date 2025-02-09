@@ -27,8 +27,9 @@
             </div>        
             <div class="mb-3">
                 <label for="bookingid" class="form-label">BookingId:</label> 
-                <InputNumber id="bookingid" @bind-Value="Feedback.BookingId" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.BookingId" class="text-danger" /> 
+                <div id="bookingid" class="form-control">
+                    @Feedback.BookingId
+                </div>
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
@@ -42,6 +43,19 @@
 @code {
     [SupplyParameterFromForm]
     private Feedback Feedback { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Feedback.BookingId = GenerateRandomBookingId();
+    }
+
+    private int GenerateRandomBookingId()
+    {
+        Random random = new Random();
+        return random.Next(10000000, 99999999); // Generates a random 8-digit number
+    }
+    
+
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddFeedback()

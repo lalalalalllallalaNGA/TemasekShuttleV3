@@ -17,19 +17,33 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="uniquepaymentid" class="form-label">UniquePaymentId:</label> 
-                <InputText id="uniquepaymentid" @bind-Value="Payment.UniquePaymentId" class="form-control" /> 
+                
+                <div id="UniquePaymentId" class="form-control">
+                    @Payment.UniquePaymentId
+                </div>
+
                 <ValidationMessage For="() => Payment.UniquePaymentId" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="paymenttype" class="form-label">PaymentType:</label> 
-                <InputText id="paymenttype" @bind-Value="Payment.PaymentType" class="form-control" /> 
-                <ValidationMessage For="() => Payment.PaymentType" class="text-danger" /> 
-            </div>        
+                <label for="paymenttype" class="form-label">PaymentType:</label>
+                <InputSelect id="paymenttype" @bind-Value="Payment.PaymentType" class="form-control">
+                    <option value="">Select a payment type</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="PayPal">ApplePay</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </InputSelect>
+                <ValidationMessage For="() => Payment.PaymentType" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="paymentamount" class="form-label">PaymentAmount:</label> 
-                <InputNumber id="paymentamount" @bind-Value="Payment.PaymentAmount" class="form-control" /> 
-                <ValidationMessage For="() => Payment.PaymentAmount" class="text-danger" /> 
-            </div>        
+                <label for="paymentamount" class="form-label">Payment Amount:</label>
+                <InputSelect id="paymentamount" @bind-Value="Payment.PaymentAmount" class="form-control">
+                    <option value="">Select a payment amount</option>
+                    <option value="$1.50 (non-peak)">$1.50 (non-peak)</option>
+                    <option value="$2.50 (peak)">$2.50 (peak)</option>
+                </InputSelect>
+                <ValidationMessage For="() => Payment.PaymentAmount" class="text-danger" />
+            </div>
             <div class="mb-3">
                 <label for="paymentamountid" class="form-label">PaymentAmountId:</label> 
                 <InputNumber id="paymentamountid" @bind-Value="Payment.PaymentAmountId" class="form-control" /> 
@@ -52,6 +66,21 @@
 @code {
     [SupplyParameterFromForm]
     private Payment Payment { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Payment.UniquePaymentId = GenerateRandomUniquePaymentId();
+    }
+
+    private string? GenerateRandomUniquePaymentId()
+    {
+        Random random = new Random();
+
+        int randomNumber = random.Next(10000000, 99999999); // Generates a random 8-digit number
+        return randomNumber.ToString(); // Convert the integer to string
+    }
+
+
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddPayment()

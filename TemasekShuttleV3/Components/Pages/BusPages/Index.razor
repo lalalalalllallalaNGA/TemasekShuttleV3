@@ -10,10 +10,12 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<h1>List of buses available</h1>
 
 <p>
-    <a href="buses/create">Create New</a>
+    <AuthorizeView Roles="Administrator">
+        <a href="buss/create">Create New</a>
+    </AuthorizeView>
 </p>
 
 <QuickGrid Class="table" Items="context.Bus">
@@ -23,9 +25,9 @@
 
     <TemplateColumn Context="bus">
         <AuthorizeView Roles="Administrator"> 
-            <a href="@($"buses/edit?id={bus.Id}")">Edit</a> |
-            <a href="@($"buses/details?id={bus.Id}")">Details</a> |
-            <a href="@($"buses/delete?id={bus.Id}")">Delete</a>
+            <a href="@($"buss/edit?id={bus.Id}")">Edit</a> |
+            <a href="@($"buss/details?id={bus.Id}")">Details</a> |
+            <a href="@($"buss/delete?id={bus.Id}")">Delete</a>
         </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>

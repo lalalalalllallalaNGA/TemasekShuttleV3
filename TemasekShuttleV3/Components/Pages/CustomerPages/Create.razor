@@ -19,7 +19,16 @@
                 <label for="customername" class="form-label">CustomerName:</label> 
                 <InputText id="customername" @bind-Value="Customer.CustomerName" class="form-control" /> 
                 <ValidationMessage For="() => Customer.CustomerName" class="text-danger" /> 
-            </div>        
+            </div>    
+            
+            <div class="mb-3">
+                <label for="CustomerId" class="form-label">CustomerId:</label>
+                <div id="CustomerId" class="form-control">
+                    @Customer.CustomerContact
+                </div>
+                <ValidationMessage For="() => Customer.CustomerName" class="text-danger" />
+            </div>
+
             <div class="mb-3">
                 <label for="customercontact" class="form-label">CustomerContact:</label> 
                 <InputText id="customercontact" @bind-Value="Customer.CustomerContact" class="form-control" /> 
@@ -37,6 +46,19 @@
 @code {
     [SupplyParameterFromForm]
     private Customer Customer { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Customer.CustomerContact  = GenerateRandomUniquePaymentId();
+    }
+
+    private string? GenerateRandomUniquePaymentId()
+    {
+        Random random = new Random();
+
+        int randomNumber = random.Next(10000000, 99999999); // Generates a random 8-digit number
+        return randomNumber.ToString(); // Convert the integer to string
+    }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddCustomer()
