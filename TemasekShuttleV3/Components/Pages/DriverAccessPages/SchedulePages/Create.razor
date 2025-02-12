@@ -14,42 +14,49 @@
     <div class="col-md-4">
         <EditForm method="post" Model="Schedule" OnValidSubmit="AddSchedule" FormName="create" Enhance>
             <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
+            <ValidationSummary class="text-danger" role="alert" />
             <div class="mb-3">
-                <label for="busscheduledate" class="form-label">BusScheduleDate:</label> 
-                <InputDate id="busscheduledate" @bind-Value="Schedule.BusScheduleDate" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.BusScheduleDate" class="text-danger" /> 
-            </div>        
+                <label for="busscheduledate" class="form-label">BusScheduleDate:</label>
+                <InputDate id="busscheduledate" @bind-Value="Schedule.BusScheduleDate" class="form-control" />
+                <ValidationMessage For="() => Schedule.BusScheduleDate" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="busscheduletime" class="form-label">BusScheduleTime:</label> 
-                <InputDate id="busscheduletime" @bind-Value="Schedule.BusScheduleTime" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.BusScheduleTime" class="text-danger" /> 
-            </div>        
+                <label for="busscheduletime" class="form-label">BusScheduleTime:</label>
+                <InputText id="busscheduletime" @bind-Value="BusScheduleTimeString" class="form-control" />
+                <ValidationMessage For="() =>  BusScheduleTimeString" class="text-danger" />
+            </div>
+           
             <div class="mb-3">
-                <label for="schedulelocation" class="form-label">ScheduleLocation:</label> 
-                <InputText id="schedulelocation" @bind-Value="Schedule.ScheduleLocation" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.ScheduleLocation" class="text-danger" /> 
-            </div>        
+                <label for="schedulelocation" class="form-label">ScheduleLocation:</label>
+                <InputSelect id="schedulelocation" @bind-Value="Schedule.ScheduleLocation" class="form-control">
+                    <option value="">Select a location</option>
+                    <option value="Tampines East MRT Exit C (SA4B1G3R)">Tampines East MRT Exit C (SA4B1G3R)</option>
+                    <option value="Punggol MRT Exit A (PM0T7J9D)">Punggol MRT Exit A (PM0T7J9D)</option>
+                </InputSelect>
+            <ValidationMessage For="() => Schedule.ScheduleLocation" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="driverdate" class="form-label">DriverDate:</label> 
-                <InputDate id="driverdate" @bind-Value="Schedule.DriverDate" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.DriverDate" class="text-danger" /> 
-            </div>        
+                <label for="driverdate" class="form-label">DriverDate:</label>
+                <InputDate id="driverdate" @bind-Value="Schedule.DriverDate" class="form-control" />
+                <ValidationMessage For="() => Schedule.DriverDate" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="drivertime" class="form-label">DriverTime:</label> 
-                <InputDate id="drivertime" @bind-Value="Schedule.DriverTime" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.DriverTime" class="text-danger" /> 
-            </div>        
+                <label for="drivertime" class="form-label">DriverTime:</label>
+                <InputText id="drivertime" @bind-Value="DriverTimeString" class="form-control" />
+                <ValidationMessage For="() => DriverTimeString" class="text-danger" />
+            </div>
+
+
             <div class="mb-3">
-                <label for="sparedriver" class="form-label">SpareDriver:</label> 
-                <InputText id="sparedriver" @bind-Value="Schedule.SpareDriver" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.SpareDriver" class="text-danger" /> 
-            </div>        
+                <label for="sparedriver" class="form-label">SpareDriver:</label>
+                <InputText id="sparedriver" @bind-Value="Schedule.SpareDriver" class="form-control" />
+                <ValidationMessage For="() => Schedule.SpareDriver" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="driverid" class="form-label">DriverId:</label> 
-                <InputNumber id="driverid" @bind-Value="Schedule.DriverId" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.DriverId" class="text-danger" /> 
-            </div>        
+                <label for="driverid" class="form-label">DriverId:</label>
+                <InputNumber id="driverid" @bind-Value="Schedule.DriverId" class="form-control" />
+                <ValidationMessage For="() => Schedule.DriverId" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -62,6 +69,31 @@
 @code {
     [SupplyParameterFromForm]
     private Schedule Schedule { get; set; } = new();
+
+
+    private string DriverTimeString
+    {
+        get => Schedule.DriverTime.ToString("HH:mm"); // Format as HH:mm
+        set
+        {
+            if (TimeOnly.TryParse(value, out var parsedTime))
+            {
+                Schedule.DriverTime = parsedTime;
+            }
+        }
+    }
+
+    private string BusScheduleTimeString
+    {
+        get => Schedule.BusScheduleTime.ToString("HH:mm"); // Format as HH:mm
+        set
+        {
+            if (TimeOnly.TryParse(value, out var parsedTime))
+            {
+                Schedule.BusScheduleTime = parsedTime;
+            }
+        }
+    }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddSchedule()
