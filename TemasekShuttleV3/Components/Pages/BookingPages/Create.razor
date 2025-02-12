@@ -69,12 +69,12 @@
 
     private string BusTimeString
     {
-        get => Booking.BusTimeString.ToString("HH:mm"); // Format as HH:mm
+        get => Booking.BusTime.ToString("HH:mm"); // Format as HH:mm
         set
         {
             if (TimeOnly.TryParse(value, out var parsedTime))
             {
-                Booking.BusTimeString = parsedTime;
+                Booking.BusTime = parsedTime;
             }
         }
     }
