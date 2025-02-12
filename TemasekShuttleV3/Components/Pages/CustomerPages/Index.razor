@@ -17,6 +17,7 @@
 <QuickGrid Class="table" Items="context.Customer">
     <PropertyColumn Property="customer => customer.CustomerName" />
     <PropertyColumn Property="customer => customer.CustomerContact" />
+    <PropertyColumn Property="customer => customer.Id" />
 
     <TemplateColumn Context="customer">
         <a href="@($"customers/edit?id={customer.Id}")">Edit</a> |
